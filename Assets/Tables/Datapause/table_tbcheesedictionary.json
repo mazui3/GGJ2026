@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "icon": "CheeseWord_test_01",
+    "wordClass": 1,
+    "wordContent": [
+      "Sub1",
+      "Sub2",
+      "Sub3"
+    ]
+  },
+  {
+    "id": 2,
+    "icon": "CheeseWord_test_02",
+    "wordClass": 2,
+    "wordContent": [
+      "Pre1",
+      "Pre2",
+      "Pre3"
+    ]
+  },
+  {
+    "id": 3,
+    "icon": "CheeseWord_test_03",
+    "wordClass": 3,
+    "wordContent": [
+      "Obj1",
+      "Obj2",
+      "Obj3"
+    ]
+  }
+]

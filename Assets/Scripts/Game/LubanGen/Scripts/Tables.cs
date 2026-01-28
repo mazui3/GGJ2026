@@ -14,16 +14,22 @@ namespace cfg
 {
 public partial class Tables
 {
+    public Table.TbCheeseDictionary TbCheeseDictionary {get; }
+    public Table.TbCheeseScene TbCheeseScene {get; }
     public demo.Tbitem Tbitem {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
+        TbCheeseDictionary = new Table.TbCheeseDictionary(loader("table_tbcheesedictionary"));
+        TbCheeseScene = new Table.TbCheeseScene(loader("table_tbcheesescene"));
         Tbitem = new demo.Tbitem(loader("demo_tbitem"));
         ResolveRef();
     }
     
     private void ResolveRef()
     {
+        TbCheeseDictionary.ResolveRef(this);
+        TbCheeseScene.ResolveRef(this);
         Tbitem.ResolveRef(this);
     }
 }
