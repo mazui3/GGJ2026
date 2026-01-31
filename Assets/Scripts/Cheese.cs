@@ -51,7 +51,7 @@ public class Cheese : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     
     public void OnDrag(PointerEventData eventData)
     {
-        if (isDraggable)
+        // if (isDraggable)
         {
             // delta 是鼠标移动的增量，除以 canvas 的缩放系数以保证同步
             rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
@@ -65,12 +65,22 @@ public class Cheese : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         canvasGroup.blocksRaycasts = true;
 
         // 如果没有掉落在目标区域，可以考虑在这里写回弹逻辑
-        UIParent.DragAttempt();
+        // UIParent.DragAttempt();
+        var wordsInHoles = GetVisibleWords();
+        foreach (var word in wordsInHoles)
+        {
+            Debug.Log(word.RevealWord());
+        }
+
+        if (wordsInHoles != null)
+        {
+            // isDraggable = false;
+        }
     }
 
-    public List<GameObject> GetVisibleWords()
+    public List<CheeseWord> GetVisibleWords()
     {
-        List<Transform> visibleWords = new List<Transform>();
+        List<CheeseWord> visibleWords = new List<CheeseWord>();
         // 找到所有的单词物体
         Transform[] allWords = UIParent.Content.gameObject.GetComponentsInChildren<Transform>(false);
         
@@ -81,11 +91,14 @@ public class Cheese : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
             if (IsPointInCheeseHole(wordCenter))
             {
-                visibleWords.Add(word);
+                if (word.gameObject.TryGetComponent<CheeseWord>(out var comp))
+                {
+                    visibleWords.Add(comp);
+                }
             }
         }
 
-        return null;
+        return visibleWords;
     }
 
     private bool IsPointInCheeseHole(Vector3 worldPoint)

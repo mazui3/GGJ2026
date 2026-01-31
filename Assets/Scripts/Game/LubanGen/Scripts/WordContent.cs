@@ -18,7 +18,7 @@ public sealed partial class WordContent : Luban.BeanBase
     public WordContent(JSONNode _buf) 
     {
         { if(!_buf["TypeOfWord"].IsNumber) { throw new SerializationException(); }  TypeOfWord = (Enum.CheeseWord)_buf["TypeOfWord"].AsInt; }
-        { if(!_buf["WordChoice"].IsString) { throw new SerializationException(); }  WordChoice = _buf["WordChoice"]; }
+        { var __json0 = _buf["WordChoice"]; if(!__json0.IsArray) { throw new SerializationException(); } WordChoice = new System.Collections.Generic.List<string>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { string __v0;  { if(!__e0.IsString) { throw new SerializationException(); }  __v0 = __e0; }  WordChoice.Add(__v0); }   }
     }
 
     public static WordContent DeserializeWordContent(JSONNode _buf)
@@ -33,7 +33,7 @@ public sealed partial class WordContent : Luban.BeanBase
     /// <summary>
     /// 单词
     /// </summary>
-    public readonly string WordChoice;
+    public readonly System.Collections.Generic.List<string> WordChoice;
    
     public const int __ID__ = -1141928465;
     public override int GetTypeId() => __ID__;
@@ -46,7 +46,7 @@ public sealed partial class WordContent : Luban.BeanBase
     {
         return "{ "
         + "TypeOfWord:" + TypeOfWord + ","
-        + "WordChoice:" + WordChoice + ","
+        + "WordChoice:" + Luban.StringUtil.CollectionToString(WordChoice) + ","
         + "}";
     }
 }

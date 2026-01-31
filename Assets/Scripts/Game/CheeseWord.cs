@@ -32,9 +32,10 @@ namespace QFramework.Example
 			}));
 		}
 
-		public void IsCovered()
+		public string RevealWord()
 		{
-			
+			return currentDictionary.Wordcontent[0].WordChoice[0];
 		}
+		
 	}
 }

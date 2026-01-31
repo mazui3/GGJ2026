@@ -259,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIParent: {fileID: -4833541541804939325}
   isDraggable: 0
+  cheeseTexture: {fileID: 2800000, guid: 35eb39170fe02784aa9fb419f04f6630, type: 3}
 --- !u!225 &2274888376566193722
 CanvasGroup:
   m_ObjectHideFlags: 0

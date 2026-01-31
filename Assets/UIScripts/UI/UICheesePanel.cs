@@ -54,10 +54,7 @@ namespace QFramework.Example
 
 		public void DragAttempt()
 		{
-			foreach (var word in Content.gameObject.GetComponentsInChildren<CheeseWord>())
-			{
-				
-			}
+			
 		}
 		
 		private void OnCheeseDropped(int id, string word)
