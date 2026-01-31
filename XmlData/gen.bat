@@ -10,5 +10,5 @@ dotnet %LUBAN_DLL% ^
     --conf %CONF_ROOT%\luban.conf ^
     -x inputDataDir="%~dp0Datas" ^
     -x outputCodeDir="%OUT_DIR%\Scripts\Game\LubanGen\Scripts" ^
-    -x outputDataDir="%OUT_DIR%\Tables\Data"^
+    -x outputDataDir="%OUT_DIR%\Resources\Tables\Data"^
 pause

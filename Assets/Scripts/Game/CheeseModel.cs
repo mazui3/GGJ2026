@@ -7,28 +7,44 @@ using UnityEngine;
 
 public class CheeseModel : AbstractModel
 {
-    private CheeseScene currentScene;
-    public CheeseScene CurrentScene { get { return currentScene; } }
+    // 使用 BindableProperty，这样 UI 可以监听它的变化
+    public BindableProperty<CheeseScene> CurrentScene = new BindableProperty<CheeseScene>();
+    public BindableProperty<bool> CheeseDrag = new BindableProperty<bool>();
     
-    //Need to store the data for the CheeseSentence Player form
     protected override void OnInit()
     {
     }
 
-    public List<CheeseWord> CurrentCheeseList()
+    public void LoadCurrentScene(int level)
     {
-        List<CheeseWord> results = new List<CheeseWord>();
+        CurrentScene.Value = TableManager.Instance.Tables.TbCheeseScene.Get(level);
+        // if change here, ui panel should load - using the current cheese list below
+    }
+
+    public void EnableCheeseDrag()
+    {
+        CheeseDrag.Value = true;
+    }
+    
+    public void DisableCheeseDrag()
+    {
+        CheeseDrag.Value = false;
+    }
+    
+    public List<CheeseDictionary> CurrentCheeseList()
+    {
+        List<CheeseDictionary> results = new List<CheeseDictionary>();
         
-        if (currentScene == null)
+        if (CurrentScene == null)
             return null;
         else
         {
-            foreach (var word in currentScene.Words)
+            foreach (var word in CurrentScene.Value.Words)
             {
-                TableManager.Instance.Tables.TbCheeseDictionary.Get(word);
+                results.Add(TableManager.Instance.Tables.TbCheeseDictionary.Get(word));
             }
         }
 
-        return null;
+        return results;
     }
 }

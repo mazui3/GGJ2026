@@ -11,6 +11,10 @@ public class Global : Architecture<Global>
     {
         AudioKit.PlaySoundMode = AudioKit.PlaySoundModes.IgnoreSameSoundInSoundFrames;
         RegisterModel(new CheeseModel());
+        RegisterSystem(new CheeseSystem());
+        
+        // 如果有其他 System 也可以在这里注册
+        RegisterSystem(new GamePlaySystem());
         
         // Command
         IsAlive = true;
@@ -20,4 +24,15 @@ public class Global : Architecture<Global>
     {
         IsAlive = false;
     }
+}
+
+public struct ResetGameEvent
+{
+    public int Level;
+}
+
+public struct DropCheeseEvent 
+{
+    public int CheeseId;
+    public string Word;
 }
