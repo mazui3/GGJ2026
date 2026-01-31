@@ -1,0 +1,30 @@
+[
+  {
+    "ID": 1,
+    "Icon": "CheeseWord_test_01",
+    "wordcontent": [
+      {
+        "TypeOfWord": 1,
+        "WordChoice": "Sub1,Sub2,Sub3"
+      },
+      {
+        "TypeOfWord": 2,
+        "WordChoice": "Pred1,Pred2,Pred3"
+      },
+      {
+        "TypeOfWord": 3,
+        "WordChoice": "Obj1,Obj2,Obj3"
+      }
+    ]
+  },
+  {
+    "ID": 2,
+    "Icon": "CheeseWord_test_02",
+    "wordcontent": [
+      {
+        "TypeOfWord": 1,
+        "WordChoice": "Sub1,Sub2,Sub3"
+      }
+    ]
+  }
+]

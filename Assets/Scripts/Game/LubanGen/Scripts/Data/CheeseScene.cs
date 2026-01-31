@@ -27,9 +27,12 @@ public sealed partial class CheeseScene : Luban.BeanBase
         return new Data.CheeseScene(_buf);
     }
 
+    /// <summary>
+    /// id
+    /// </summary>
     public readonly int Id;
     /// <summary>
-    /// int:cheeseDictionary&#39;s id, can repeat
+    /// int: cheeseDictionary id
     /// </summary>
     public readonly System.Collections.Generic.List<int> Words;
     public readonly System.Collections.Generic.List<Enum.CheeseWord> SentenceStructure;

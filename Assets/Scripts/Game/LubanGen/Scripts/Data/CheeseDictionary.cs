@@ -17,10 +17,9 @@ public sealed partial class CheeseDictionary : Luban.BeanBase
 {
     public CheeseDictionary(JSONNode _buf) 
     {
-        { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
-        { if(!_buf["icon"].IsString) { throw new SerializationException(); }  Icon = _buf["icon"]; }
-        { if(!_buf["wordClass"].IsNumber) { throw new SerializationException(); }  WordClass = (Enum.CheeseWord)_buf["wordClass"].AsInt; }
-        { var __json0 = _buf["wordContent"]; if(!__json0.IsArray) { throw new SerializationException(); } WordContent = new System.Collections.Generic.List<string>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { string __v0;  { if(!__e0.IsString) { throw new SerializationException(); }  __v0 = __e0; }  WordContent.Add(__v0); }   }
+        { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
+        { if(!_buf["Icon"].IsString) { throw new SerializationException(); }  Icon = _buf["Icon"]; }
+        { var __json0 = _buf["wordcontent"]; if(!__json0.IsArray) { throw new SerializationException(); } Wordcontent = new System.Collections.Generic.List<WordContent>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { WordContent __v0;  { if(!__e0.IsObject) { throw new SerializationException(); }  __v0 = global::cfg.WordContent.DeserializeWordContent(__e0);  }  Wordcontent.Add(__v0); }   }
     }
 
     public static CheeseDictionary DeserializeCheeseDictionary(JSONNode _buf)
@@ -28,28 +27,27 @@ public sealed partial class CheeseDictionary : Luban.BeanBase
         return new Data.CheeseDictionary(_buf);
     }
 
-    public readonly int Id;
     /// <summary>
-    /// asset name without .png
+    /// id
     /// </summary>
+    public readonly int ID;
     public readonly string Icon;
-    public readonly Enum.CheeseWord WordClass;
-    public readonly System.Collections.Generic.List<string> WordContent;
+    public readonly System.Collections.Generic.List<WordContent> Wordcontent;
    
     public const int __ID__ = -856309103;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
+        foreach (var _e in Wordcontent) { _e?.ResolveRef(tables); }
     }
 
     public override string ToString()
     {
         return "{ "
-        + "id:" + Id + ","
-        + "icon:" + Icon + ","
-        + "wordClass:" + WordClass + ","
-        + "wordContent:" + Luban.StringUtil.CollectionToString(WordContent) + ","
+        + "ID:" + ID + ","
+        + "Icon:" + Icon + ","
+        + "wordcontent:" + Luban.StringUtil.CollectionToString(Wordcontent) + ","
         + "}";
     }
 }
