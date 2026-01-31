@@ -1,4 +1,4 @@
-// Generate Id:0d7f782b-30c5-4bd8-8777-b5d648a26e5f
+// Generate Id:8b4d271f-acd8-45b5-9929-acfd86bcfc5b
 using UnityEngine;
 
 // 1.请在菜单 编辑器扩展/Namespace Settings 里设置命名空间
@@ -7,7 +7,5 @@ namespace QFramework.Example
 {
 	public partial class CheeseWord
 	{
-		public UnityEngine.UI.Image Image;
-		
 	}
 }
