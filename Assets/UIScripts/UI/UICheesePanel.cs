@@ -51,11 +51,6 @@ namespace QFramework.Example
 				theWord.GetComponent<CheeseWord>().LoadWord(word);
 			}
 		}
-
-		public void DragAttempt()
-		{
-			
-		}
 		
 		private void OnCheeseDropped(int id, string word)
 		{

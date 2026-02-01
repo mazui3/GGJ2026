@@ -44,14 +44,17 @@ public class Cheese : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     
     public void OnBeginDrag(PointerEventData eventData)
     {
-        // 拖拽时降低透明度，并允许射线穿透（这样才能检测到下方的 Drop 目标）
-        canvasGroup.alpha = 0.6f;
-        canvasGroup.blocksRaycasts = false;
+        if (isDraggable)
+        {
+            // 拖拽时降低透明度，并允许射线穿透（这样才能检测到下方的 Drop 目标）
+            canvasGroup.alpha = 0.6f;
+            canvasGroup.blocksRaycasts = false;
+        }
     }
     
     public void OnDrag(PointerEventData eventData)
     {
-        // if (isDraggable)
+        if (isDraggable)
         {
             // delta 是鼠标移动的增量，除以 canvas 的缩放系数以保证同步
             rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
@@ -65,20 +68,8 @@ public class Cheese : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         canvasGroup.blocksRaycasts = true;
 
         // 如果没有掉落在目标区域，可以考虑在这里写回弹逻辑
-        // UIParent.DragAttempt();
         var wordsInHoles = GetVisibleWords();
-        foreach (var word in wordsInHoles)
-        {
-            Debug.Log(word.RevealWord());
-        }
-
-        this.GetSystem<CheeseSystem>().UpdateCheeseWords(wordsInHoles);
         this.SendCommand(new DropCheeseCommand(wordsInHoles));
-        
-        if (wordsInHoles != null)
-        {
-            // isDraggable = false;
-        }
     }
 
     public List<CheeseWord> GetVisibleWords()

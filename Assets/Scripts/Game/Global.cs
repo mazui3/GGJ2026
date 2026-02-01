@@ -36,3 +36,19 @@ public struct DropCheeseEvent
     public int CheeseId;
     public string Word;
 }
+
+public class RestartGameCommand : AbstractCommand
+{
+    private readonly int level;
+    
+    public RestartGameCommand(int targetLevel)
+    {
+        level = targetLevel;
+    }
+
+    protected override void OnExecute()
+    {
+        this.GetSystem<GamePlaySystem>().StartLevel(1);
+        this.GetSystem<GamePlaySystem>().ChangeState(GamePlayType.Reset);
+    }
+}

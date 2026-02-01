@@ -20,6 +20,9 @@ public class CheeseSystem : AbstractSystem
     {
     }
     
+    // scene id + result string
+    private Dictionary<int, string> cheeseAnwsers = new Dictionary<int, string>();
+    
     //We should generate the Cheese gameplay here - leave Model for reading the raw data
 
     public void LoadNewScene(int level)
@@ -32,20 +35,35 @@ public class CheeseSystem : AbstractSystem
         cheeseModel.EnableCheeseDrag();
     }
 
-    public void UpdateCheeseWords(List<CheeseWord> resultWords)
+    public void DisableCheeseDrag()
     {
+        cheeseModel.DisableCheeseDrag();
+    }
+
+    public string UpdateCheeseWords(List<CheeseWord> resultWords)
+    {
+        List<string> result = new List<string>();
+     
         int resultWordCount = resultWords.Count;
         int expectWordCount = cheeseModel.CurrentScene.Value.SentenceStructure.Count;
 
         if (resultWordCount < expectWordCount)
         {
-            return;
+            return null;
+        }
+
+        for (int i = 0; i < expectWordCount; i++)
+        {
+            var typeOfWord = cheeseModel.CurrentScene.Value.SentenceStructure[i];
+            result.Add(resultWords[i].RevealWord(typeOfWord));
+        }
+
+        if (result.Count > 0)
+        {
+            return string.Join(" ", result);
         }
         
-        foreach (var expectedWord in cheeseModel.CurrentScene.Value.SentenceStructure)
-        {
-            
-        }
+        return null;
     }
  
 }
@@ -62,18 +80,19 @@ public class DropCheeseCommand : AbstractCommand
     protected override void OnExecute()
     {
         // 1. 让 CheeseSystem 处理计算逻辑（比如是否掉进了洞里）
-        // var isSuccess = this.GetSystem<CheeseSystem>().HandleDropResult();
-        //
-        // // 2. 根据计算结果，直接告诉 GamePlaySystem 切换状态
-        // // 假设你的 IGamePlaySystem 接口里有 ChangeState 方法
-        // if (isSuccess)
-        // {
-        //     this.GetSystem<GamePlaySystem>().ChangeState(GamePlayType.Dialog); 
-        // }
-        // else
-        // {
-        //     // 失败了可能去另一个状态，或者重试
-        //     this.GetSystem<GamePlaySystem>().ChangeState(GamePlayType.Reset);
-        // }
+        var result = this.GetSystem<CheeseSystem>().UpdateCheeseWords(words);
+        
+        // 2. 根据计算结果，直接告诉 GamePlaySystem 切换状态
+        // 假设你的 IGamePlaySystem 接口里有 ChangeState 方法
+        if (result != null)
+        {
+            this.GetSystem<CheeseSystem>().DisableCheeseDrag();
+            this.GetSystem<GamePlaySystem>().ChangeState(GamePlayType.DropCheese);
+        }
+        else
+        {
+            // 失败了可能去另一个状态，或者重试
+            this.GetSystem<GamePlaySystem>().ChangeState(GamePlayType.PickCheese);
+        }
     }
 }

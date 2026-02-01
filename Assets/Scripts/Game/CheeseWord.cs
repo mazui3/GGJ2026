@@ -1,4 +1,5 @@
 using cfg.Data;
+using cfg.Enum;
 using UnityEngine;
 using QFramework;
 using Unity.VisualScripting;
@@ -14,6 +15,9 @@ namespace QFramework.Example
 		public UnityEngine.UI.Image Image;
 		public UnityEngine.UI.Button Button;
 
+		[SerializeField]
+		public float aspectRatio = 0.5f;
+		
 		CheeseDictionary currentDictionary;
 		
 		void Start()
@@ -24,17 +28,24 @@ namespace QFramework.Example
 		public void LoadWord(CheeseDictionary theWord)
 		{
 			currentDictionary = theWord;
-			Image.sprite =  Resources.Load<Sprite>("Sprites/Words/" + theWord.Icon);
+			Sprite sprite = Resources.Load<Sprite>("Sprites/Words/" + theWord.Icon);
+			Image.sprite = sprite;
+			RectTransform rt = Image.transform.GetComponent<RectTransform>();
+			rt.sizeDelta = new Vector2(sprite.rect.width * aspectRatio, sprite.rect.height * aspectRatio);
+			
 			Button.onClick.RemoveAllListeners();
 			Button.onClick.AddListener((() =>
 			{
 				Debug.Log(theWord.Wordcontent[0].WordChoice[0]);
 			}));
 		}
-
-		public string RevealWord()
+		
+		public string RevealWord(CheeseWordData dataLookUp = CheeseWordData.Subject)
 		{
-			return currentDictionary.Wordcontent[0].WordChoice[0];
+			// I should use a map instead of a list of workContent
+			var theWord = currentDictionary.Wordcontent.Find(x => x.TypeOfWord == dataLookUp);
+			// TODO Word choice is a list to involve some randomness later
+			return theWord.WordChoice[0];
 		}
 		
 	}

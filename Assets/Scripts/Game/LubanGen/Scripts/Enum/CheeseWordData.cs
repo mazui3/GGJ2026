@@ -33,6 +33,8 @@ namespace cfg.Enum
         /// 表语
         /// </summary>
         Predicative = 5,
+        Adjective = 6,
+        Verb = 7,
     }
 
 } 

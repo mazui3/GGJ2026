@@ -7,6 +7,7 @@ using UnityEngine;
 
 public enum GamePlayType
 {
+    Idle,
     Reset,//generate set up
     Dialog,
     PickCheese,
@@ -41,7 +42,6 @@ public class GamePlaySystem : AbstractSystem
     public void Start()
     {       
         ClearData();
-        StartLevel(0);
     }
     
     private void ClearData()
@@ -49,7 +49,7 @@ public class GamePlaySystem : AbstractSystem
         Data = new GamePlayRuntimeData();
     }
 
-    private void StartLevel(int level)
+    public void StartLevel(int level)
     {
         Data.CurrentLevel = level;
     }
@@ -61,12 +61,31 @@ public class GamePlaySystem : AbstractSystem
     
     private void SetUpFsm()
     {
+        mFSM.AddState(GamePlayType.Idle, new StateIdle(mFSM, this));
         mFSM.AddState(GamePlayType.Reset, new StateReset(mFSM, this));
         mFSM.AddState(GamePlayType.Dialog, new StateDialog(mFSM, this));
         mFSM.AddState(GamePlayType.PickCheese, new StatePickCheese(mFSM, this));
         mFSM.AddState(GamePlayType.DropCheese, new StateDropCheese(mFSM, this));
         mFSM.AddState(GamePlayType.GenerateSentence, new StateGenerateSentence(mFSM, this));
-        mFSM.StartState(GamePlayType.Reset);
+        mFSM.StartState(GamePlayType.Idle);
+    }
+    
+    public class StateIdle : AbstractState<GamePlayType, GamePlaySystem>
+    {
+        public StateIdle(FSM<GamePlayType> fsm, GamePlaySystem target) : base(fsm, target)
+        {
+        }
+        
+        protected override void OnEnter()
+        {
+            base.OnEnter();
+            Debug.Log("Idle State");
+        }
+
+        protected override void OnExit()
+        {
+            base.OnExit();
+        }
     }
     
     public class StateReset : AbstractState<GamePlayType, GamePlaySystem>
@@ -80,7 +99,6 @@ public class GamePlaySystem : AbstractSystem
             base.OnEnter();
             Debug.Log("Reset State");
             
-            // mOwner.SendEvent(new ResetGameEvent { Level = mOwner.Data.CurrentLevel });
             // mOwner.GetSystem<CheeseSystem>().CreateCheese();
             mOwner.GetSystem<CheeseSystem>().LoadNewScene(mOwner.Data.CurrentLevel);
             mFSM.ChangeState(GamePlayType.Dialog);
@@ -134,14 +152,11 @@ public class GamePlaySystem : AbstractSystem
             return true;
         }
         
-        // mTarget.RegisterEvent<ASMRInteractionFinishEvent>(OnInteractionFinishEventReceive);
-        // DoPlayerInterAction();
         protected override void OnEnter()
         {
             base.OnEnter();
             Debug.Log("PickCheese State");
-            // 你可以通过 mOwner 访问 System 里的数据
-
+       
             mOwner.GetSystem<CheeseSystem>().EnableCheeseDrag();
         }
 
@@ -174,6 +189,7 @@ public class GamePlaySystem : AbstractSystem
             base.OnEnter();
             Debug.Log("DropCheese State");
             // 你可以通过 mOwner 访问 System 里的数据
+            mFSM.ChangeState(GamePlayType.GenerateSentence);
         }
     }
     
