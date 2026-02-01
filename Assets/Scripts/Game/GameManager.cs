@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour, IController
     public IArchitecture GetArchitecture() => Global.Interface;
     void Awake()
     {
-       
+        Application.targetFrameRate = 60;
     }
     
     // Start is called before the first frame update

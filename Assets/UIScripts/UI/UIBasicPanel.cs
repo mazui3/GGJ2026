@@ -26,6 +26,12 @@ namespace QFramework.Example
 				UIKit.OpenPanel<UICheesePanel>();
 				this.CloseSelf();
 			});
+			
+			ExitBtn.onClick.RemoveAllListeners();
+			ExitBtn.onClick.AddListener(() =>
+			{
+				Application.Quit();
+			});
 		}
 		
 		protected override void OnOpen(IUIData uiData = null)
