@@ -12,7 +12,7 @@ public enum GamePlayType
     Dialog,
     PickCheese,
     DropCheese,
-    GenerateSentence//return result
+    GenerateAnswer//return result
 }
 
 public class GamePlayRuntimeData
@@ -26,17 +26,24 @@ public interface IGamePlaySystem : ISystem
     void UpdateState(); // 由 Controller 驱动
 }
 
-public class GamePlaySystem : AbstractSystem
+public class GamePlaySystem : AbstractSystem, IController
 { 
+    public IArchitecture GetArchitecture() => Global.Interface;
+    
     public FSM<GamePlayType> mFSM = new FSM<GamePlayType>();
     
     public GamePlayRuntimeData Data { get; set; } = new GamePlayRuntimeData();
-    public CheeseScene SceneData;// do I really need this
-    
+ 
     protected override void OnInit()
     {
         ClearData();
         SetUpFsm();
+        
+        ActionKit.OnUpdate.Register(() => 
+        {
+            // 只要 System 存在，就每帧驱动一次状态机
+            mFSM.Update(); 
+        });
     }
     
     public void Start()
@@ -66,7 +73,7 @@ public class GamePlaySystem : AbstractSystem
         mFSM.AddState(GamePlayType.Dialog, new StateDialog(mFSM, this));
         mFSM.AddState(GamePlayType.PickCheese, new StatePickCheese(mFSM, this));
         mFSM.AddState(GamePlayType.DropCheese, new StateDropCheese(mFSM, this));
-        mFSM.AddState(GamePlayType.GenerateSentence, new StateGenerateSentence(mFSM, this));
+        mFSM.AddState(GamePlayType.GenerateAnswer, new StateGenerateAnswer(mFSM, this));
         mFSM.StartState(GamePlayType.Idle);
     }
     
@@ -123,6 +130,7 @@ public class GamePlaySystem : AbstractSystem
             Debug.Log("Dialog State");
             
             //TODO
+            mOwner.GetSystem<CheeseSystem>().DisplayQuestion();
             mFSM.ChangeState(GamePlayType.PickCheese);
             
             // 监听结束事件
@@ -189,23 +197,35 @@ public class GamePlaySystem : AbstractSystem
             base.OnEnter();
             Debug.Log("DropCheese State");
             // 你可以通过 mOwner 访问 System 里的数据
-            mFSM.ChangeState(GamePlayType.GenerateSentence);
+            mFSM.ChangeState(GamePlayType.GenerateAnswer);
         }
     }
     
-    public class StateGenerateSentence : AbstractState<GamePlayType, GamePlaySystem>
+    public class StateGenerateAnswer : AbstractState<GamePlayType, GamePlaySystem>
     {
-        public StateGenerateSentence(FSM<GamePlayType> fsm, GamePlaySystem target) : base(fsm, target)
+        public StateGenerateAnswer(FSM<GamePlayType> fsm, GamePlaySystem target) : base(fsm, target)
         {
         }
+        private float mTimer = 0;
         
         protected override void OnEnter()
         {
+            mTimer = 0;
             base.OnEnter();
             Debug.Log("GenerateSentence State");
             // 你可以通过 mOwner 访问 System 里的数据
+            mOwner.GetSystem<CheeseSystem>().DisplayAnswer();
+        }
+        
+        protected override void OnUpdate()
+        {
+            mTimer += Time.deltaTime;
+            if (mTimer >= 3.0f) // 等待 3 秒
+            {
+                mOwner.Data.CurrentLevel += 1;
+                mFSM.ChangeState(GamePlayType.Reset);
+            }
         }
     }
-    
     
 }

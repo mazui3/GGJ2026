@@ -60,10 +60,27 @@ public class CheeseSystem : AbstractSystem
 
         if (result.Count > 0)
         {
+            // TODO
+            cheeseAnwsers.Add(cheeseModel.CurrentScene.Value.Id, string.Join(" ", result));
             return string.Join(" ", result);
         }
         
         return null;
+    }
+
+    public string GetCheeseAnswer(int id)
+    {
+        return cheeseAnwsers[id];
+    }
+    
+    public void DisplayAnswer()
+    {
+        cheeseModel.IsAnswerVisible.Value = true;  // 开启显示
+    }
+
+    public void DisplayQuestion()
+    {
+        cheeseModel.IsQuestionVisible.Value = true;
     }
  
 }

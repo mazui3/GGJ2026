@@ -5,25 +5,22 @@ using QFramework;
 
 namespace QFramework.Example
 {
-	// Generate Id:67caae7f-7d7b-4ffa-a7a9-53b90ef11bb2
+	// Generate Id:4b912db1-60af-4d7d-8b7f-74ad1d6002c2
 	public partial class UIBasicPanel
 	{
 		public const string Name = "UIBasicPanel";
 		
 		[SerializeField]
-		public UnityEngine.UI.Image Logo;
+		public TMPro.TextMeshProUGUI Answer;
 		[SerializeField]
-		public UnityEngine.UI.Button StartBtn;
-		[SerializeField]
-		public UnityEngine.UI.Button ExitBtn;
+		public TMPro.TextMeshProUGUI Question;
 		
 		private UIBasicPanelData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
-			Logo = null;
-			StartBtn = null;
-			ExitBtn = null;
+			Answer = null;
+			Question = null;
 			
 			mData = null;
 		}

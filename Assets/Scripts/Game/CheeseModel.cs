@@ -10,7 +10,9 @@ public class CheeseModel : AbstractModel
     // 使用 BindableProperty，这样 UI 可以监听它的变化
     public BindableProperty<CheeseScene> CurrentScene = new BindableProperty<CheeseScene>();
     public BindableProperty<bool> CheeseDrag = new BindableProperty<bool>();
-    
+    public BindableProperty<bool> IsAnswerVisible = new BindableProperty<bool>(false);
+    public BindableProperty<bool> IsQuestionVisible = new BindableProperty<bool>(false);
+
     protected override void OnInit()
     {
     }

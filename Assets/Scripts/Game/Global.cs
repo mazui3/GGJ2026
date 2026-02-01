@@ -24,17 +24,12 @@ public class Global : Architecture<Global>
     {
         IsAlive = false;
     }
+    
 }
 
 public struct ResetGameEvent
 {
     public int Level;
-}
-
-public struct DropCheeseEvent 
-{
-    public int CheeseId;
-    public string Word;
 }
 
 public class RestartGameCommand : AbstractCommand

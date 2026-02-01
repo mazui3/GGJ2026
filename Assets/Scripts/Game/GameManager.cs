@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour, IController
     void Start()
     {
         this.GetSystem<GamePlaySystem>().Start();
-        UIKit.OpenPanel<UIBasicPanel>();
+        UIKit.OpenPanel<UIStartPanel>();
     }
 
     // Update is called once per frame

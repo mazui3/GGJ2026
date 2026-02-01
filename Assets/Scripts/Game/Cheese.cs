@@ -63,13 +63,16 @@ public class Cheese : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // 恢复透明度和射线检测
-        canvasGroup.alpha = 1.0f;
-        canvasGroup.blocksRaycasts = true;
+        if (isDraggable)
+        {
+            // 恢复透明度和射线检测
+            canvasGroup.alpha = 1.0f;
+            canvasGroup.blocksRaycasts = true;
 
-        // 如果没有掉落在目标区域，可以考虑在这里写回弹逻辑
-        var wordsInHoles = GetVisibleWords();
-        this.SendCommand(new DropCheeseCommand(wordsInHoles));
+            // 如果没有掉落在目标区域，可以考虑在这里写回弹逻辑
+            var wordsInHoles = GetVisibleWords();
+            this.SendCommand(new DropCheeseCommand(wordsInHoles));
+        }
     }
 
     public List<CheeseWord> GetVisibleWords()

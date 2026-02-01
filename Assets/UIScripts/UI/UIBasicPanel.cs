@@ -19,19 +19,21 @@ namespace QFramework.Example
 			mData = uiData as UIBasicPanelData ?? new UIBasicPanelData();
 			// please add init code here
 			
-			StartBtn.onClick.RemoveAllListeners();
-			StartBtn.onClick.AddListener(() =>
+			this.GetModel<CheeseModel>().IsAnswerVisible.Register(isVisible => 
 			{
-				this.SendCommand(new RestartGameCommand(1));
-				UIKit.OpenPanel<UICheesePanel>();
-				this.CloseSelf();
-			});
+				if (isVisible)
+				{
+					DisplayAnswer();
+				}
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			
-			ExitBtn.onClick.RemoveAllListeners();
-			ExitBtn.onClick.AddListener(() =>
+			this.GetModel<CheeseModel>().IsQuestionVisible.Register(isVisible => 
 			{
-				Application.Quit();
-			});
+				if (isVisible)
+				{
+					DisplayQuestion();
+				}
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 		}
 		
 		protected override void OnOpen(IUIData uiData = null)
@@ -48,6 +50,17 @@ namespace QFramework.Example
 		
 		protected override void OnClose()
 		{
+		}
+		
+		private void DisplayAnswer()
+		{
+			// 更新 UI 表现，比如播放个特效或者变色
+			Answer.text = this.GetSystem<CheeseSystem>().GetCheeseAnswer(this.GetModel<CheeseModel>().CurrentScene.Value.Id);
+		}
+
+		private void DisplayQuestion()
+		{
+			Question.text = this.GetModel<CheeseModel>().CurrentScene.Value.Question;
 		}
 	}
 }

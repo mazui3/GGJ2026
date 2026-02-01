@@ -32,12 +32,6 @@ namespace QFramework.Example
 			{
 				Cheese.isDraggable = isEnable;
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
-			
-			this.RegisterEvent<DropCheeseEvent>(e => 
-			{
-				OnCheeseDropped(e.CheeseId, e.Word);
-			}).UnRegisterWhenGameObjectDestroyed(gameObject);
-			
 		}
 		
 		public void RefreshUI(int level)
@@ -50,12 +44,6 @@ namespace QFramework.Example
 				theWord.name = "CheeseWord_" + word.ID;
 				theWord.GetComponent<CheeseWord>().LoadWord(word);
 			}
-		}
-		
-		private void OnCheeseDropped(int id, string word)
-		{
-			Debug.Log($"UI 收到掉落信号：芝士 {id} (单词: {word}) 已放置");
-			// 更新 UI 表现，比如播放个特效或者变色
 		}
 		
 		protected override void OnOpen(IUIData uiData = null)

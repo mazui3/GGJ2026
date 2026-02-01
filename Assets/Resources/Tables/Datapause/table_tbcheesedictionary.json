@@ -187,68 +187,14 @@
   },
   {
     "ID": 12,
-    "Icon": "Expired",
+    "Icon": "expired_pizza",
     "wordcontent": [
       {
         "TypeOfWord": 6,
         "WordChoice": [
           "Expired"
         ]
-      }
-    ]
-  },
-  {
-    "ID": 13,
-    "Icon": "Burnt",
-    "wordcontent": [
-      {
-        "TypeOfWord": 6,
-        "WordChoice": [
-          "Burnt"
-        ]
-      }
-    ]
-  },
-  {
-    "ID": 14,
-    "Icon": "Frozen",
-    "wordcontent": [
-      {
-        "TypeOfWord": 6,
-        "WordChoice": [
-          "Frozen"
-        ]
-      }
-    ]
-  },
-  {
-    "ID": 15,
-    "Icon": "Salty",
-    "wordcontent": [
-      {
-        "TypeOfWord": 6,
-        "WordChoice": [
-          "Salty"
-        ]
-      }
-    ]
-  },
-  {
-    "ID": 16,
-    "Icon": "Free",
-    "wordcontent": [
-      {
-        "TypeOfWord": 6,
-        "WordChoice": [
-          "Free"
-        ]
-      }
-    ]
-  },
-  {
-    "ID": 17,
-    "Icon": "Pizza",
-    "wordcontent": [
+      },
       {
         "TypeOfWord": 3,
         "WordChoice": [
@@ -258,9 +204,15 @@
     ]
   },
   {
-    "ID": 18,
-    "Icon": "Milk",
+    "ID": 13,
+    "Icon": "burnt_milk",
     "wordcontent": [
+      {
+        "TypeOfWord": 6,
+        "WordChoice": [
+          "Burnt"
+        ]
+      },
       {
         "TypeOfWord": 3,
         "WordChoice": [
@@ -270,9 +222,15 @@
     ]
   },
   {
-    "ID": 19,
-    "Icon": "Food",
+    "ID": 14,
+    "Icon": "frozen_food",
     "wordcontent": [
+      {
+        "TypeOfWord": 6,
+        "WordChoice": [
+          "Frozen"
+        ]
+      },
       {
         "TypeOfWord": 3,
         "WordChoice": [
@@ -282,9 +240,15 @@
     ]
   },
   {
-    "ID": 20,
-    "Icon": "Cookies",
+    "ID": 15,
+    "Icon": "salty_cookies",
     "wordcontent": [
+      {
+        "TypeOfWord": 6,
+        "WordChoice": [
+          "Salty"
+        ]
+      },
       {
         "TypeOfWord": 3,
         "WordChoice": [
@@ -294,9 +258,15 @@
     ]
   },
   {
-    "ID": 21,
-    "Icon": "Sushi",
+    "ID": 16,
+    "Icon": "free_sushi",
     "wordcontent": [
+      {
+        "TypeOfWord": 6,
+        "WordChoice": [
+          "Free"
+        ]
+      },
       {
         "TypeOfWord": 3,
         "WordChoice": [
@@ -306,21 +276,15 @@
     ]
   },
   {
-    "ID": 22,
-    "Icon": "Committing",
+    "ID": 17,
+    "Icon": "committing_tax_evasion",
     "wordcontent": [
       {
         "TypeOfWord": 7,
         "WordChoice": [
           "Committing"
         ]
-      }
-    ]
-  },
-  {
-    "ID": 23,
-    "Icon": "Tax_Evasion",
-    "wordcontent": [
+      },
       {
         "TypeOfWord": 3,
         "WordChoice": [
@@ -330,85 +294,37 @@
     ]
   },
   {
-    "ID": 24,
-    "Icon": "Fraud",
-    "wordcontent": [
-      {
-        "TypeOfWord": 3,
-        "WordChoice": [
-          "Fraud"
-        ]
-      }
-    ]
-  },
-  {
-    "ID": 25,
-    "Icon": "Visiting",
+    "ID": 18,
+    "Icon": "visiting_jail",
     "wordcontent": [
       {
         "TypeOfWord": 7,
         "WordChoice": [
-          "Visiting"
+          "Visit"
         ]
-      }
-    ]
-  },
-  {
-    "ID": 26,
-    "Icon": "Puerto_Rico",
-    "wordcontent": [
+      },
       {
         "TypeOfWord": 3,
         "WordChoice": [
-          "Puerto Rico"
+          "Jail"
         ]
       }
     ]
   },
   {
-    "ID": 27,
-    "Icon": "Losing",
+    "ID": 19,
+    "Icon": "losing_socks",
     "wordcontent": [
       {
         "TypeOfWord": 7,
         "WordChoice": [
           "Losing"
         ]
-      }
-    ]
-  },
-  {
-    "ID": 28,
-    "Icon": "Socks",
-    "wordcontent": [
+      },
       {
         "TypeOfWord": 3,
         "WordChoice": [
           "Socks"
-        ]
-      }
-    ]
-  },
-  {
-    "ID": 29,
-    "Icon": "Going_to",
-    "wordcontent": [
-      {
-        "TypeOfWord": 7,
-        "WordChoice": [
-          "Going to"
-        ]
-      }
-    ]
-  },
-  {
-    "ID": 30,
-    "Icon": "Sesame_Street",
-    "wordcontent": [
-      {
-        "TypeOfWord": 3,
-        "WordChoice": [
-          "Sesame Street"
         ]
       }
     ]
