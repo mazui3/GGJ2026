@@ -19,7 +19,7 @@ public sealed partial class CheeseScene : Luban.BeanBase
     {
         { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { var __json0 = _buf["words"]; if(!__json0.IsArray) { throw new SerializationException(); } Words = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  Words.Add(__v0); }   }
-        { var __json0 = _buf["sentenceStructure"]; if(!__json0.IsArray) { throw new SerializationException(); } SentenceStructure = new System.Collections.Generic.List<Enum.CheeseWord>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Enum.CheeseWord __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = (Enum.CheeseWord)__e0.AsInt; }  SentenceStructure.Add(__v0); }   }
+        { var __json0 = _buf["sentenceStructure"]; if(!__json0.IsArray) { throw new SerializationException(); } SentenceStructure = new System.Collections.Generic.List<Enum.CheeseWordData>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { Enum.CheeseWordData __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = (Enum.CheeseWordData)__e0.AsInt; }  SentenceStructure.Add(__v0); }   }
     }
 
     public static CheeseScene DeserializeCheeseScene(JSONNode _buf)
@@ -35,7 +35,7 @@ public sealed partial class CheeseScene : Luban.BeanBase
     /// int: cheeseDictionary id
     /// </summary>
     public readonly System.Collections.Generic.List<int> Words;
-    public readonly System.Collections.Generic.List<Enum.CheeseWord> SentenceStructure;
+    public readonly System.Collections.Generic.List<Enum.CheeseWordData> SentenceStructure;
    
     public const int __ID__ = 905983409;
     public override int GetTypeId() => __ID__;

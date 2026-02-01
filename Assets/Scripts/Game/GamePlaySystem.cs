@@ -104,6 +104,9 @@ public class GamePlaySystem : AbstractSystem
             base.OnEnter();
             Debug.Log("Dialog State");
             
+            //TODO
+            mFSM.ChangeState(GamePlayType.PickCheese);
+            
             // 监听结束事件
             // mTarget.RegisterEvent<ASMRStartFinishEvent>(OnStartStageFinishEventReceive);
             // mTarget.SendEvent(new ASMRStartFinishEvent());
@@ -154,7 +157,7 @@ public class GamePlaySystem : AbstractSystem
             {
                 // 逻辑处理...
                 // 切换状态
-                mFSM.ChangeState(GamePlayType.DropCheese);
+                // mFSM.ChangeState(GamePlayType.DropCheese);
             }
         }
         

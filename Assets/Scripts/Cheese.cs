@@ -72,6 +72,9 @@ public class Cheese : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             Debug.Log(word.RevealWord());
         }
 
+        this.GetSystem<CheeseSystem>().UpdateCheeseWords(wordsInHoles);
+        this.SendCommand(new DropCheeseCommand(wordsInHoles));
+        
         if (wordsInHoles != null)
         {
             // isDraggable = false;

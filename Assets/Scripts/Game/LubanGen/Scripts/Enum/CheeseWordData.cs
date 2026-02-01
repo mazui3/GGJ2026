@@ -11,7 +11,7 @@
 
 namespace cfg.Enum
 { 
-    public enum CheeseWord
+    public enum CheeseWordData
     {
         /// <summary>
         /// 主语
