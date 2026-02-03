@@ -55,12 +55,12 @@ namespace QFramework.Example
 		private void DisplayAnswer()
 		{
 			// 更新 UI 表现，比如播放个特效或者变色
-			Answer.text = this.GetSystem<CheeseSystem>().GetCheeseAnswer(this.GetModel<CheeseModel>().CurrentScene.Value.Id);
+			AnswerText.text = this.GetSystem<CheeseSystem>().GetCheeseAnswer(this.GetModel<CheeseModel>().CurrentScene.Value.Id);
 		}
 
 		private void DisplayQuestion()
 		{
-			Question.text = this.GetModel<CheeseModel>().CurrentScene.Value.Question;
+			QuestionText.text = this.GetModel<CheeseModel>().CurrentScene.Value.Question;
 		}
 	}
 }
