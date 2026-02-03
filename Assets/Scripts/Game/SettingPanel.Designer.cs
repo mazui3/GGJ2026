@@ -1,11 +1,11 @@
-// Generate Id:8016837b-dcc7-4899-9619-0219c0d3bfe4
+// Generate Id:1c095b32-d031-4f1c-a923-f60a402a69fb
 using UnityEngine;
 
 // 1.请在菜单 编辑器扩展/Namespace Settings 里设置命名空间
 // 2.命名空间更改后，生成代码之后，需要把逻辑代码文件（非 Designer）的命名空间手动更改
 namespace QFramework.Example
 {
-	public partial class SettinPanel
+	public partial class SettingPanel
 	{
 		public UnityEngine.UI.Button ExitBtn;
 		

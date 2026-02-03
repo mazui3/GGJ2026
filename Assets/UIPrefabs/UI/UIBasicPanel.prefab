@@ -382,9 +382,9 @@ GameObject:
   - component: {fileID: 7838414787343129771}
   - component: {fileID: 3652951495298956338}
   - component: {fileID: 6285171136700376337}
-  - component: {fileID: 8035932775187649197}
+  - component: {fileID: 623209897926622976}
   m_Layer: 5
-  m_Name: SettinPanel
+  m_Name: SettingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,8 +466,8 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: SettinPanel
   CustomComment: 
-  mComponentName: QFramework.ViewController
---- !u!114 &8035932775187649197
+  mComponentName: UnityEngine.UI.Image
+--- !u!114 &623209897926622976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -476,11 +476,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3304332128285389694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06c2b951809b85e409c8ee6054fd4448, type: 3}
+  m_Script: {fileID: 11500000, guid: 340a234103583154996415faff4147ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Namespace: QFramework.Example
-  ScriptName: SettinPanel
+  ScriptName: SettingPanel
   ScriptsFolder: Assets/Scripts/Game
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
