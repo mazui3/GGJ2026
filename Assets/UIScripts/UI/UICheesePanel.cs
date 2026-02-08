@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using QFramework;
@@ -24,7 +25,11 @@ namespace QFramework.Example
 			{
 				if (scene != null)
 				{
-					RefreshUI(scene.Id); 
+					RefreshUI(); 
+				}
+				else
+				{
+					FinishGame();
 				}
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			
@@ -34,9 +39,13 @@ namespace QFramework.Example
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 		}
 		
-		public void RefreshUI(int level)
+		private float duration = 1f;
+		private void RefreshUI()
 		{
-			var cheeses = this.GetModel<CheeseModel>().CurrentScene.Value;
+			var targetPositionVector = ThePlaceCheeseSupposedToBe;
+			Cheese.transform.DOMove(targetPositionVector.position, duration)
+				.SetEase(Ease.OutCubic);
+			
 			Content.gameObject.DestroyChildren();
 			foreach (var word in this.GetModel<CheeseModel>().CurrentCheeseList())
 			{
@@ -44,6 +53,13 @@ namespace QFramework.Example
 				theWord.name = "CheeseWord_" + word.ID;
 				theWord.GetComponent<CheeseWord>().LoadWord(word);
 			}
+		}
+
+		private void FinishGame()
+		{
+			UIKit.OpenPanel<UIEndPanel>();
+			UIKit.ClosePanel<UIBasicPanel>();
+			this.CloseSelf();
 		}
 		
 		protected override void OnOpen(IUIData uiData = null)

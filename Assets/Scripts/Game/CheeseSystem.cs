@@ -22,6 +22,7 @@ public class CheeseSystem : AbstractSystem
     
     // scene id + result string
     private Dictionary<int, string> cheeseAnwsers = new Dictionary<int, string>();
+    public BindableProperty<string> CheeseAnwsers = new BindableProperty<string>();
     
     //We should generate the Cheese gameplay here - leave Model for reading the raw data
 
@@ -38,6 +39,11 @@ public class CheeseSystem : AbstractSystem
     public void DisableCheeseDrag()
     {
         cheeseModel.DisableCheeseDrag();
+    }
+
+    public void ResetData()
+    {
+        cheeseAnwsers.Clear();
     }
 
     public string UpdateCheeseWords(List<CheeseWord> resultWords)
@@ -73,16 +79,32 @@ public class CheeseSystem : AbstractSystem
         return cheeseAnwsers[id];
     }
     
-    public void DisplayAnswer()
+    public void DisplayAnswer(bool isShow)
     {
-        cheeseModel.IsAnswerVisible.Value = true;  // 开启显示
+        cheeseModel.IsAnswerVisible.Value = isShow;  // 开启显示
     }
 
-    public void DisplayQuestion()
+    public void DisplayQuestion(bool isShow)
     {
-        cheeseModel.IsQuestionVisible.Value = true;
+        cheeseModel.IsQuestionVisible.Value = isShow;
     }
- 
+
+    public void FinishGame()
+    {
+        ExportAnswersForEndRoll();
+    }
+
+    private void ExportAnswersForEndRoll()
+    {
+        //TODO - should make the sentence more sense
+        string theAnswer = string.Empty;
+        foreach (var item in cheeseAnwsers)
+        {
+            theAnswer += item.Value + "\n";
+        }
+        CheeseAnwsers.Value = theAnswer;
+    }
+
 }
 
 public class DropCheeseCommand : AbstractCommand

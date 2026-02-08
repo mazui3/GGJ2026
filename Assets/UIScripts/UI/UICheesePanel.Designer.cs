@@ -5,7 +5,7 @@ using QFramework;
 
 namespace QFramework.Example
 {
-	// Generate Id:bcf3d176-d36a-49d4-bc81-e335cee9e693
+	// Generate Id:0c6c0b9e-69d3-4f4f-8fc5-0e0fa901d2b6
 	public partial class UICheesePanel
 	{
 		public const string Name = "UICheesePanel";
@@ -14,6 +14,8 @@ namespace QFramework.Example
 		public RectTransform Content;
 		[SerializeField]
 		public Cheese Cheese;
+		[SerializeField]
+		public RectTransform ThePlaceCheeseSupposedToBe;
 		
 		private UICheesePanelData mPrivateData = null;
 		
@@ -21,6 +23,7 @@ namespace QFramework.Example
 		{
 			Content = null;
 			Cheese = null;
+			ThePlaceCheeseSupposedToBe = null;
 			
 			mData = null;
 		}

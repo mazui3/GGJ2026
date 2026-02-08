@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "sceneId": 1,
+    "dialogData": [
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "My dearest person in the world…"
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "We’ve been married 48 hours and we still don't have a 20-year plan!"
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "Let's start from here, what are we going to call our first-born?"
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "It needs to be strong, timeless, and noble."
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "It has to be unique!"
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "You listening…?"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "sceneId": 2,
+    "dialogData": [
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "Talking about the baby…"
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "How are we going to manage a mortgage?"
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "When do you think the economy will be better?"
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "Will there be WWIII?"
+      },
+      {
+        "DialogBoxType": 1,
+        "DialogContent": "(She is in that mood again…)"
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "And the most importantly…"
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "What do you want for dinner?"
+      },
+      {
+        "DialogBoxType": 1,
+        "DialogContent": "What?"
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "What do you want for dinner honey?"
+      },
+      {
+        "DialogBoxType": 1,
+        "DialogContent": "Wow finally a question I can answer."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "sceneId": 3,
+    "dialogData": [
+      {
+        "DialogBoxType": 1,
+        "DialogContent": "We have not been to this restaurant for so long."
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "Last time we were here was university time."
+      },
+      {
+        "DialogBoxType": 1,
+        "DialogContent": "Time flies, at that time you even don't know how to talk to a girl."
+      },
+      {
+        "DialogBoxType": 0,
+        "DialogContent": "Shut up…"
+      },
+      {
+        "DialogBoxType": 1,
+        "DialogContent": "Talking about this…"
+      },
+      {
+        "DialogBoxType": 1,
+        "DialogContent": "Could you tell me your favorite, most super-special memory of our early dating days."
+      },
+      {
+        "DialogBoxType": 1,
+        "DialogContent": "Please? With a cherry on top?"
+      }
+    ]
+  }
+]

@@ -5,19 +5,33 @@ using QFramework;
 
 namespace QFramework.Example
 {
-	// Generate Id:9022bfd4-7c2c-4a85-bad7-cededd7259a2
+	// Generate Id:aafa8b20-fe00-4b26-b1b0-7fab59a2832b
 	public partial class UIBasicPanel
 	{
 		public const string Name = "UIBasicPanel";
 		
 		[SerializeField]
-		public UnityEngine.UI.Image Answer;
+		public UnityEngine.RectTransform Answer;
 		[SerializeField]
 		public TMPro.TextMeshProUGUI AnswerText;
 		[SerializeField]
 		public RectTransform Question;
 		[SerializeField]
 		public TMPro.TextMeshProUGUI QuestionText;
+		[SerializeField]
+		public UnityEngine.GameObject Dialog;
+		[SerializeField]
+		public UnityEngine.GameObject LeftDialog;
+		[SerializeField]
+		public TMPro.TextMeshProUGUI LeftDialogText;
+		[SerializeField]
+		public UnityEngine.GameObject RightDialog;
+		[SerializeField]
+		public TMPro.TextMeshProUGUI RightDialogText;
+		[SerializeField]
+		public UnityEngine.UI.Button DialogBtn;
+		[SerializeField]
+		public UnityEngine.UI.Image SettingPanel;
 		
 		private UIBasicPanelData mPrivateData = null;
 		
@@ -27,6 +41,13 @@ namespace QFramework.Example
 			AnswerText = null;
 			Question = null;
 			QuestionText = null;
+			Dialog = null;
+			LeftDialog = null;
+			LeftDialogText = null;
+			RightDialog = null;
+			RightDialogText = null;
+			DialogBtn = null;
+			SettingPanel = null;
 			
 			mData = null;
 		}

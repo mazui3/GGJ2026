@@ -23,6 +23,12 @@ public class CheeseModel : AbstractModel
         // if change here, ui panel should load - using the current cheese list below
     }
 
+    //maybe we should put it into max id not count
+    public int MaxScene()
+    {
+        return TableManager.Instance.Tables.TbCheeseScene.DataList.Count;
+    }
+
     public void EnableCheeseDrag()
     {
         CheeseDrag.Value = true;

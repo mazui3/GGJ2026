@@ -6,6 +6,9 @@
  * https://gitee.com/liangxiegame/QFramework
  ****************************************************************************/
 
+using DOTween = DG.Tweening.DOTween;
+using Ease = DG.Tweening.Ease;
+
 namespace QFramework
 {
 	using UnityEngine;
@@ -143,5 +146,6 @@ namespace QFramework
 		{
 			mOnClosed = onPanelClosed;
 		}
+		
 	}
 }

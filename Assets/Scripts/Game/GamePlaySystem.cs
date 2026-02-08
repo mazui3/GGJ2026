@@ -12,7 +12,8 @@ public enum GamePlayType
     Dialog,
     PickCheese,
     DropCheese,
-    GenerateAnswer//return result
+    GenerateAnswer,//return result
+    End
 }
 
 public class GamePlayRuntimeData
@@ -74,6 +75,7 @@ public class GamePlaySystem : AbstractSystem, IController
         mFSM.AddState(GamePlayType.PickCheese, new StatePickCheese(mFSM, this));
         mFSM.AddState(GamePlayType.DropCheese, new StateDropCheese(mFSM, this));
         mFSM.AddState(GamePlayType.GenerateAnswer, new StateGenerateAnswer(mFSM, this));
+        mFSM.AddState(GamePlayType.End, new StateEnd(mFSM, this));
         mFSM.StartState(GamePlayType.Idle);
     }
     
@@ -105,10 +107,19 @@ public class GamePlaySystem : AbstractSystem, IController
         {
             base.OnEnter();
             Debug.Log("Reset State");
+            mOwner.GetSystem<CheeseSystem>().DisplayAnswer(false);
+            mOwner.GetSystem<CheeseSystem>().DisplayQuestion(false);
             
-            // mOwner.GetSystem<CheeseSystem>().CreateCheese();
-            mOwner.GetSystem<CheeseSystem>().LoadNewScene(mOwner.Data.CurrentLevel);
-            mFSM.ChangeState(GamePlayType.Dialog);
+            if (mOwner.GetModel<CheeseModel>().MaxScene() <= mOwner.Data.CurrentLevel)
+            {
+                mOwner.GetSystem<CheeseSystem>().FinishGame();
+                mFSM.ChangeState(GamePlayType.End);
+            }
+            else
+            {
+                mOwner.GetSystem<CheeseSystem>().LoadNewScene(mOwner.Data.CurrentLevel);
+                mFSM.ChangeState(GamePlayType.Dialog);
+            }
         }
 
         protected override void OnExit()
@@ -129,23 +140,11 @@ public class GamePlaySystem : AbstractSystem, IController
             base.OnEnter();
             Debug.Log("Dialog State");
             
-            //TODO
-            mOwner.GetSystem<CheeseSystem>().DisplayQuestion();
-            mFSM.ChangeState(GamePlayType.PickCheese);
-            
-            // 监听结束事件
-            // mTarget.RegisterEvent<ASMRStartFinishEvent>(OnStartStageFinishEventReceive);
-            // mTarget.SendEvent(new ASMRStartFinishEvent());
+            mOwner.GetSystem<DialogSystem>().LoadNewScene(mOwner.Data.CurrentLevel);
         }
-     
-        // private void OnStartStageFinishEventReceive(ASMRStartFinishEvent evt)
-        // {
-        //     mFSM.ChangeState(ASMRGamePlayState.PlaySpine);
-        // }
         
         protected override void OnExit()
         {
-            // mTarget.UnRegisterEvent<ASMRStartFinishEvent>(OnStartStageFinishEventReceive);
         }
     }
     
@@ -164,7 +163,8 @@ public class GamePlaySystem : AbstractSystem, IController
         {
             base.OnEnter();
             Debug.Log("PickCheese State");
-       
+
+            mOwner.GetSystem<CheeseSystem>().DisplayQuestion(true);
             mOwner.GetSystem<CheeseSystem>().EnableCheeseDrag();
         }
 
@@ -214,18 +214,30 @@ public class GamePlaySystem : AbstractSystem, IController
             base.OnEnter();
             Debug.Log("GenerateSentence State");
             // 你可以通过 mOwner 访问 System 里的数据
-            mOwner.GetSystem<CheeseSystem>().DisplayAnswer();
+            mOwner.GetSystem<CheeseSystem>().DisplayAnswer(true);
         }
         
         protected override void OnUpdate()
         {
             mTimer += Time.deltaTime;
-            if (mTimer >= 3.0f) // 等待 3 秒
+            if (mTimer >= 3.0f)
             {
                 mOwner.Data.CurrentLevel += 1;
                 mFSM.ChangeState(GamePlayType.Reset);
             }
         }
     }
-    
+
+    public class StateEnd : AbstractState<GamePlayType, GamePlaySystem>
+    {
+        public StateEnd(FSM<GamePlayType> fsm, GamePlaySystem target) : base(fsm, target)
+        {
+        }
+
+        protected override void OnEnter()
+        {
+            Debug.Log("End State");
+            mOwner.GetModel<CheeseModel>().CurrentScene.Value = null;
+        }
+    }
 }

@@ -13,9 +13,10 @@ public class Global : Architecture<Global>
         RegisterModel(new CheeseModel());
         RegisterSystem(new CheeseSystem());
         
-        // 如果有其他 System 也可以在这里注册
         RegisterSystem(new GamePlaySystem());
         
+        RegisterModel(new DialogModel());
+        RegisterSystem(new DialogSystem());
         // Command
         IsAlive = true;
     }
@@ -25,11 +26,6 @@ public class Global : Architecture<Global>
         IsAlive = false;
     }
     
-}
-
-public struct ResetGameEvent
-{
-    public int Level;
 }
 
 public class RestartGameCommand : AbstractCommand
@@ -43,6 +39,7 @@ public class RestartGameCommand : AbstractCommand
 
     protected override void OnExecute()
     {
+        this.GetSystem<CheeseSystem>().ResetData();
         this.GetSystem<GamePlaySystem>().StartLevel(1);
         this.GetSystem<GamePlaySystem>().ChangeState(GamePlayType.Reset);
     }
