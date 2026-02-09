@@ -15,11 +15,14 @@ namespace QFramework.Example
 		{
 			return Global.Interface;
 		}
-		
+
+		// private Transform DialogTransformForReset;
 		protected override void OnInit(IUIData uiData = null)
 		{
 			mData = uiData as UIBasicPanelData ?? new UIBasicPanelData();
 			// please add init code here
+
+			// DialogTransformForReset = Dialog.transform;
 			
 			this.GetModel<DialogModel>().IsDialogVisible.Register(isDialogVisible =>
 			{
@@ -89,11 +92,11 @@ namespace QFramework.Example
 			{
 				Answer.gameObject.SetActive(true);
 				AnswerText.text = this.GetSystem<CheeseSystem>().GetCheeseAnswer(this.GetModel<CheeseModel>().CurrentScene.Value.Id);
-				PopupOpen(Answer.transform);
+				PopupOpenAnswer(Answer.transform);
 			}
 			else
 			{
-				PopupHide(Answer.transform);
+				PopupHideAnswer(Answer.transform);
 			}
 			
 		}
@@ -115,7 +118,6 @@ namespace QFramework.Example
 		private void InitDialog()
 		{
 			//let model to handle the data change first then fresh ui
-			// Dialog.SetActive(true);
 			DisplayNextDialog();
 		}
 		
@@ -154,6 +156,7 @@ namespace QFramework.Example
 		private float slideDistance = 20f; // 滑动距离
 		private Vector3 originalPosition;
 		
+		
 		public void PopupOpen(Transform theTransform)
 		{
 			var canvasGroup = theTransform.GetComponent<CanvasGroup>();
@@ -171,7 +174,37 @@ namespace QFramework.Example
 			var canvasGroup = theTransform.GetComponent<CanvasGroup>();
 			canvasGroup.DOFade(0f, animationTime)
 				.SetEase(Ease.OutQuad)
-				.OnComplete(() => theTransform.gameObject.SetActive(false));
+				.OnComplete(() =>
+				{
+					theTransform.position = originalPosition + new Vector3(0, slideDistance, 0);
+					theTransform.gameObject.SetActive(false);
+				});
+		}
+		
+		//there should be a better way to do this, right?
+		private Vector3 originalPositionAnswer;
+		public void PopupOpenAnswer(Transform theTransform)
+		{
+			var canvasGroup = theTransform.GetComponent<CanvasGroup>();
+			canvasGroup.alpha = 1f;
+			originalPositionAnswer = theTransform.position;
+			
+			theTransform.position = originalPositionAnswer - new Vector3(0, slideDistance, 0);
+			theTransform.DOMoveY(originalPositionAnswer.y, animationTime)
+				.SetEase(Ease.OutSine)
+				.From(theTransform.position);
+		}
+		
+		public void PopupHideAnswer(Transform theTransform)
+		{
+			var canvasGroup = theTransform.GetComponent<CanvasGroup>();
+			canvasGroup.DOFade(0f, animationTime)
+				.SetEase(Ease.OutQuad)
+				.OnComplete(() =>
+				{
+					theTransform.position = originalPositionAnswer + new Vector3(0, slideDistance, 0);
+					theTransform.gameObject.SetActive(false);
+				});
 		}
 		#endregion
 	}

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using QFramework;
@@ -22,10 +23,8 @@ namespace QFramework.Example
 			StartBtn.onClick.RemoveAllListeners();
 			StartBtn.onClick.AddListener(() =>
 			{
-				this.SendCommand(new RestartGameCommand(1));
-				UIKit.OpenPanel<UICheesePanel>();
-				UIKit.OpenPanel<UIBasicPanel>();
-				this.CloseSelf();
+				Debug.Log("Button is working");
+				StartCoroutine(OnStart());
 			});
 			
 			ExitBtn.onClick.RemoveAllListeners();
@@ -33,6 +32,14 @@ namespace QFramework.Example
 			{
 				Application.Quit();
 			});
+		}
+
+		IEnumerator OnStart()
+		{
+			this.SendCommand(new RestartGameCommand(1));
+			yield return UIKit.OpenPanelAsync<UICheesePanel>();
+			yield return UIKit.OpenPanelAsync<UIBasicPanel>();
+			this.CloseSelf();
 		}
 		
 		protected override void OnShow()

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using QFramework;
@@ -25,9 +26,14 @@ namespace QFramework.Example
 			BackBtn.onClick.RemoveAllListeners();
 			BackBtn.onClick.AddListener(() =>
 			{
-				UIKit.OpenPanel<UIStartPanel>();
-				this.CloseSelf();
+				StartCoroutine(OnExit());
 			});
+		}
+
+		IEnumerator OnExit()
+		{
+			yield return UIKit.OpenPanelAsync<UIStartPanel>();
+			this.CloseSelf();
 		}
 		
 		protected override void OnOpen(IUIData uiData = null)

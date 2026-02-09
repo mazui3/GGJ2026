@@ -1,0 +1,6 @@
+<linker>
+  <assembly fullname="QFramework" preserve="all"/>
+  <assembly fullname="QFramework.ResKit" preserve="all"/>
+  <assembly fullname="mscorlib" preserve="all"/>
+  <assembly fullname="UnityEngine" preserve="all"/>
+</linker>

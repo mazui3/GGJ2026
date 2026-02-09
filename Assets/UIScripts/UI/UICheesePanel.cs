@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,7 +30,7 @@ namespace QFramework.Example
 				}
 				else
 				{
-					FinishGame();
+					StartCoroutine(FinishGame());
 				}
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			
@@ -55,9 +56,9 @@ namespace QFramework.Example
 			}
 		}
 
-		private void FinishGame()
+		IEnumerator FinishGame()
 		{
-			UIKit.OpenPanel<UIEndPanel>();
+			yield return UIKit.OpenPanelAsync<UIEndPanel>();
 			UIKit.ClosePanel<UIBasicPanel>();
 			this.CloseSelf();
 		}

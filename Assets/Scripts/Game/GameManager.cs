@@ -29,10 +29,15 @@ public class GameManager : MonoBehaviour, IController
     }
     
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        yield return ResKit.InitAsync();
+        Debug.Log(typeof(QFramework.IRes).GetProperty("Asset"));
+        
+        Debug.Log("ResKit init finished");
+        
         this.GetSystem<GamePlaySystem>().Start();
-        UIKit.OpenPanel<UIStartPanel>();
+        yield return UIKit.OpenPanelAsync<UIStartPanel>();
     }
 
     // Update is called once per frame
